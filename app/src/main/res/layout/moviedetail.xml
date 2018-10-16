@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/moviename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mintgreen"
+            android:fontFamily="sans-serif"
+            android:padding="26dp"
+            android:text="Chappie"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:id="@+id/movieimage"
+            android:layout_width="120dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/moviename"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="16dp"
+            android:padding="2dp"
+            android:src="@drawable/sample_5" />
+
+        <TextView
+            android:id="@+id/movieyear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/moviename"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/movieimage"
+            android:text="2015"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/movietime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieyear"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@id/movieimage"
+            android:text="120min"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/movierating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movietime"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/movieimage"
+            android:text="8.1/10"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <Button
+            android:id="@+id/favourite"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movierating"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/movieimage"
+            android:background="@color/mintgreen2"
+            android:text="Mark as Favourite"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieimage"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="8dp"
+            android:text="Every child comes into the world full of promise, and none more so than Chappie: he is gifted, special, a prodigy. Chappie he is a robot."
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/line1"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_below="@id/overview"
+            android:background="@color/colorPrimaryDark"/>
+
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:text="@string/trailer"
+            android:textSize="18dp"
+            android:id="@+id/textt"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/line1"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_below="@+id/textt"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="50dp"
+            android:src="@drawable/btn"
+            android:id="@+id/play"
+            android:layout_height="30dp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:id="@+id/line2"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="90dp"
+            android:layout_below="@id/line1"
+            android:background="@color/colorPrimaryDark"/>
+
+
+    </RelativeLayout>
+</ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
