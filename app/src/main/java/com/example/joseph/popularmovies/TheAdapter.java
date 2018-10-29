@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,19 +39,27 @@ public class TheAdapter extends ArrayAdapter<Movies> {
      * */
 
     public View getView(int position, View convertView, ViewGroup parent){
-        // Gets teh AndroidFlavour object from the ArrayAdapter at the appropriate position.
+        // Gets the  object from the ArrayAdapter at the appropriate position.
+        View gridView = convertView;
+        if(gridView == null){
+            gridView = LayoutInflater.from(getContext()).inflate(R.layout.mainlayout,parent,false);
+        }
+
+
         Movies thumbs = getItem(position);
+
 
         //Adapters recycle views to Adapterviews.
         // If this is a new View object we're getting, then inflate the layout.
         // If not, this view already has the layout inflated froma previous call to getView.
         // and we modify the View widgets as usual.
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.mainlayout,parent,false);
-        }
 
-        ImageView thumbsnail =(ImageView) convertView.findViewById(R.id.thumbImage);
-        thumbsnail.setImageResource(thumbs.getMovieImage());
-        return  convertView;
+
+        ImageView imageView = gridView.findViewById(R.id.thumbImage);
+        //imageView.setImageResource(thumbs.getMovieImage());
+        Picasso.with(getContext()).load(thumbs.getMovieImage()).into(imageView);
+
+
+        return  gridView;
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -13,33 +14,33 @@
             android:layout_height="wrap_content"
             android:background="@color/mintgreen"
             android:fontFamily="sans-serif"
-            android:padding="26dp"
-            android:text="Chappie"
+            android:padding="34dp"
+            tools:text="Chappie"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="44sp" />
 
         <ImageView
             android:id="@+id/movieimage"
             android:layout_width="120dp"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:layout_below="@id/moviename"
             android:layout_marginLeft="18dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="16dp"
-            android:padding="2dp"
-            android:src="@drawable/sample_5" />
+            android:padding="2dp"/>
+            <!--android:src="@drawable/sample_5" -->
 
         <TextView
             android:id="@+id/movieyear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/moviename"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="9dp"
             android:layout_toRightOf="@id/movieimage"
-            android:text="2015"
+            tools:text="2015"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/movietime"
@@ -48,19 +49,20 @@
             android:layout_below="@id/movieyear"
             android:layout_marginTop="1dp"
             android:layout_toRightOf="@id/movieimage"
-            android:text="120min"
+            tools:text="120min"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="italic" />
 
         <TextView
             android:id="@+id/movierating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:layout_below="@id/movietime"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/movieimage"
-            android:text="8.1/10"
+            tools:text="8.1/10"
             android:textColor="@color/colorPrimaryDark" />
 
         <Button
@@ -71,7 +73,7 @@
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/movieimage"
             android:background="@color/mintgreen2"
-            android:text="Mark as Favourite"
+            android:text="@string/mark_as_favourite"
             android:textSize="13sp" />
 
         <TextView
@@ -82,8 +84,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="6dp"
             android:layout_marginBottom="8dp"
-            android:text="Every child comes into the world full of promise, and none more so than Chappie: he is gifted, special, a prodigy. Chappie he is a robot."
-            android:textColor="@color/colorPrimaryDark"
+            tools:text="Every child comes into the world full of promise, and none more so than Chappie: he is gifted, special, a prodigy. Chappie he is a robot."
+            android:textColor="@color/grey"
             android:textSize="16dp" />
 
         <View
@@ -99,7 +101,7 @@
         <TextView
             android:layout_marginTop="6dp"
             android:text="@string/trailer"
-            android:textSize="18dp"
+            tools:textSize="18dp"
             android:id="@+id/textt"
             android:layout_marginLeft="12dp"
             android:textColor="@color/colorPrimaryDark"
