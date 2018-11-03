@@ -3,4 +3,14 @@
     <string name="name">Movie Detail</string>
     <string name="trailer">Trailers</string>
     <string name="mark_as_favourite">Mark as Favourite</string>
+
+    <!--Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings">Settings</string>
+    <!--Settings Activity Title [CHAR LIMIT =NONE]-->
+    <string name="settings_title">Movie Settings</string>
+
+
+    <string name="popular_movies_label">Popular Movies</string>
+    <string name="settings_popular_key" translatable="false">popular_movies</string>
+    <string name="settings_rating_key" translatable="false">rated_movies</string>
 </resources>

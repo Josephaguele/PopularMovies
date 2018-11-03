@@ -1,23 +1,22 @@
 package com.example.joseph.popularmovies;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.joseph.popularmovies.QueryUtils.OVERVIEW;
-import static com.example.joseph.popularmovies.QueryUtils.POSTERPATH;
+import java.util.prefs.Preferences;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movies_activity); // setContent to the grid view layout
+
+//        PreferenceManager.setDefaultValues(this,R.xml.settings_main,false);
 
         // Get the list of movies from QueryUtils
          GridView gridView = (GridView) findViewById(R.id.listview);
@@ -79,6 +80,23 @@ public class MainActivity extends AppCompatActivity {
                 adapter.addAll(movies);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater() ;
+        menuInflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    // This method is called when you select an item in the menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent startSettingsActivity = new Intent(this,SettingsActivity.class);
+            startActivity(startSettingsActivity);        }
+        return true;
     }
 
 }
