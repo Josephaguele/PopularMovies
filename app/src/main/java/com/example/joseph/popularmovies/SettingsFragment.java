@@ -15,7 +15,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         // load the preferences from an XML resource
         addPreferencesFromResource(R.xml.settings_main);
 
-
+        //Preference popular = findPreference(getString(R.string.settings_popular_key));
+        //bindPreferenceSummaryToValue(popular);
     }
 
     @Override
@@ -36,9 +37,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
-        preference.setOnPreferenceChangeListener(this);
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
         String preferenceString = preferences.getString(preference.getKey(), "");
         onPreferenceChange(preference, preferenceString);
+
+        preference.setOnPreferenceChangeListener(this);
     }
 }

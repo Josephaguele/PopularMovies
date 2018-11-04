@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Here i have passed in the movies class which is the main parameter for the array of images needed
@@ -61,5 +62,9 @@ public class TheAdapter extends ArrayAdapter<Movies> {
 
 
         return  gridView;
+    }
+
+    public void setMovies(ArrayList<Movies> movies){
+
     }
 }

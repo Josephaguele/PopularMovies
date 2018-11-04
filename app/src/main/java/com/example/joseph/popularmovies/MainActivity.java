@@ -1,12 +1,18 @@
 package com.example.joseph.popularmovies;
 
+import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,28 +22,26 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movies>> {
 
-    private  TheAdapter adapter;
-    private static String QUERY_URL ="https://api.themoviedb.org/3/movie/popular?api_key=c20c1695d76d341c16a929a587a97dfb";
+    private static String QUERY_URL = "https://api.themoviedb.org/3/movie/popular?api_key=c20c1695d76d341c16a929a587a97dfb";
+    private TheAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movies_activity); // setContent to the grid view layout
 
-//        PreferenceManager.setDefaultValues(this,R.xml.settings_main,false);
 
         // Get the list of movies from QueryUtils
-         GridView gridView = (GridView) findViewById(R.id.listview);
+        GridView gridView = (GridView) findViewById(R.id.listview);
 
         // create a new adapter that takes in a list of earthquakes
-         adapter = new TheAdapter(this, new ArrayList<Movies>());
+        adapter = new TheAdapter(this, new ArrayList<Movies>());
 
-         // set the adapter on the GridView so the list can be populated in the user interface
+        // set the adapter on the GridView so the list can be populated in the user interface
         gridView.setAdapter(adapter);
 
         // this onclick method opens any movie clicked to launch the detail of that movie.
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 // calling intent to launch detail activity
                 Movies currentMoviePoster = adapter.getItem(position);
                 Movies movies = new Movies();
-                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("Movies", currentMoviePoster);
                 startActivity(intent);
 
@@ -55,36 +59,70 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MoviesAsyncTask task = new MoviesAsyncTask();
-        task.execute(QUERY_URL);
+        // Get a reference to the ConnectivityMgr to check the state of the network connectivity
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Get details on the currently active default data network
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null & networkInfo.isConnected()) {
+            // get a reference to the LoaderManager, in order to interact with loaders
+            LoaderManager loaderManager = getLoaderManager();
+
+            // Initalize the loader. Pass in the int ID constant defined above and pass in null for
+            // the bundle. Pass in the activity for the LoaderCallbacks parameter (which is valid
+            // because this activity implements the LoaderCallbacks interface)
+            loaderManager.initLoader(1, null, this);
+        } else {
+            // Otherwise, display error
+            // First, hide loading indicator so error message will be visible
+
+
+            // UPDATE empty state with no connection error message
+        }
+
     }
 
+    @NonNull
+    @Override
+    public Loader<List<Movies>> onCreateLoader(int i, @Nullable Bundle bundle) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String popular = sharedPreferences.getString
+                (getString(R.string.settings_popular_key),
+                        getString(R.string.popular_movies_label));
 
+        Uri baseUri = Uri.parse(QUERY_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
 
-    private class MoviesAsyncTask extends AsyncTask<String, Void,List<Movies>> {
-        @Override
-        protected List<Movies> doInBackground(String...urls){
-            if (urls.length < 1 || urls[0] == null){
-                return null;
-            }
-            List<Movies>result = QueryUtils.fetchMoviesData(urls[0]);
+        uriBuilder.appendQueryParameter("sortby", "popular");
+        return new MoviesLoader(this, uriBuilder.toString());
 
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(List<Movies> movies) {
-            adapter.clear();
-
-            if(movies != null && !movies.isEmpty()) {
-                adapter.addAll(movies);
-            }
-        }
     }
 
     @Override
+    public void onLoadFinished(@NonNull Loader<List<Movies>> loader, List<Movies> movies) {
+        // Update the UI with the result
+        // sames as onPostExecute method of the AsyncTask
+        adapter.clear();
+
+        if (movies != null && !movies.isEmpty()) {
+            adapter.addAll(movies);
+        }
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<List<Movies>> movies) {
+        // Loader reset, so we can clear out our existing data
+        adapter.setMovies(new ArrayList<Movies>());
+        adapter.clear();
+
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater() ;
+        MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.settings_menu, menu);
         return true;
     }
@@ -93,9 +131,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
-            Intent startSettingsActivity = new Intent(this,SettingsActivity.class);
-            startActivity(startSettingsActivity);        }
+        if (id == R.id.action_settings) {
+            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(startSettingsActivity);
+        }
         return true;
     }
 
