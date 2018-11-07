@@ -4,20 +4,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceScreen;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
 
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        // load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.settings_main);
-
-        //Preference popular = findPreference(getString(R.string.settings_popular_key));
-        //bindPreferenceSummaryToValue(popular);
-    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
@@ -43,5 +35,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         onPreferenceChange(preference, preferenceString);
 
         preference.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        addPreferencesFromResource(R.xml.settings_main);
+        PreferenceScreen screen = getPreferenceScreen();
+        screen.findPreference(getString(R.string.settings_popular_key));
+        Preference preference = new Preference(screen.getContext());
+        bindPreferenceSummaryToValue(preference);
     }
 }

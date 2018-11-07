@@ -39,8 +39,8 @@ public class MoviesLoader extends AsyncTaskLoader<List<Movies>> {
             return null;
         }
             // Perform the network request, parse the response, and extract a list of football games
-            List<Movies> news = QueryUtils.fetchMoviesData(mUrl);
-            return news;
+            List<Movies> movies = QueryUtils.fetchMoviesData(mUrl);
+            return movies;
             // load in background works like the AsyncTask doInBackground method.
 
 

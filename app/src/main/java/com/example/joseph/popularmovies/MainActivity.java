@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static String QUERY_URL = "https://api.themoviedb.org/3/movie/popular?api_key=c20c1695d76d341c16a929a587a97dfb";
     private TheAdapter adapter;
 
+    TextView mEmptyStateTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +40,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Get the list of movies from QueryUtils
         GridView gridView = (GridView) findViewById(R.id.listview);
 
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty);
+        gridView.setEmptyView(mEmptyStateTextView);
         // create a new adapter that takes in a list of earthquakes
         adapter = new TheAdapter(this, new ArrayList<Movies>());
 
         // set the adapter on the GridView so the list can be populated in the user interface
         gridView.setAdapter(adapter);
+        LoaderManager loaderManager = getLoaderManager();
+        // for calling the LoaderManager in the AsyncTaskLoader class.
+        loaderManager.initLoader(1, null, this).forceLoad();
 
         // this onclick method opens any movie clicked to launch the detail of that movie.
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,18 +72,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Get details on the currently active default data network
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-        if (networkInfo != null & networkInfo.isConnected()) {
+       if (networkInfo != null ) {
             // get a reference to the LoaderManager, in order to interact with loaders
-            LoaderManager loaderManager = getLoaderManager();
+            LoaderManager loaderManager1 = getLoaderManager();
+           View loadingIndicator = findViewById(R.id.progress);
+           loadingIndicator.setVisibility(View.GONE);
 
             // Initalize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in the activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface)
-            loaderManager.initLoader(1, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
+            loaderManager1.initLoader(1, null, this);
 
+       } else {
+           View loadingIndicator = findViewById(R.id.progress);
+           loadingIndicator.setVisibility(View.GONE);
+           mEmptyStateTextView.setText("no internet connection");
+
+           return;
 
             // UPDATE empty state with no connection error message
         }
@@ -85,17 +97,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @NonNull
     @Override
-    public Loader<List<Movies>> onCreateLoader(int i, @Nullable Bundle bundle) {
+    public Loader<List<Movies>>  onCreateLoader(int i, @Nullable Bundle bundle) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String popular = sharedPreferences.getString
-                (getString(R.string.settings_popular_key),
-                        getString(R.string.popular_movies_label));
+         String popular = sharedPreferences.getString
+                (getString(R.string.settings_popular_key), "");
 
         Uri baseUri = Uri.parse(QUERY_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("sortby", "popular");
+        //uriBuilder.appendQueryParameter("sortby", popular);
         return new MoviesLoader(this, uriBuilder.toString());
+
 
     }
 
@@ -103,8 +115,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(@NonNull Loader<List<Movies>> loader, List<Movies> movies) {
         // Update the UI with the result
         // sames as onPostExecute method of the AsyncTask
+
+        // clear the adapter of previous data
         adapter.clear();
 
+        // if the movie list is valid, then add to the list and update it
         if (movies != null && !movies.isEmpty()) {
             adapter.addAll(movies);
         }

@@ -11,6 +11,6 @@
 
 
     <string name="popular_movies_label">Popular Movies</string>
-    <string name="settings_popular_key" translatable="false">popular_movies</string>
+    <string name="settings_popular_key" translatable="false">popular</string>
     <string name="settings_rating_key" translatable="false">rated_movies</string>
 </resources>
