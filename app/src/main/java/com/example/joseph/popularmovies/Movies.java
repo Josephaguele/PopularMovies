@@ -1,6 +1,5 @@
 package com.example.joseph.popularmovies;
 
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 

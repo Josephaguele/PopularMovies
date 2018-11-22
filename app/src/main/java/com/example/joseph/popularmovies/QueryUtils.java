@@ -1,6 +1,5 @@
 package com.example.joseph.popularmovies;
 
-import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import org.json.JSONArray;

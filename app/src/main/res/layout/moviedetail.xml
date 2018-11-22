@@ -86,7 +86,7 @@
             android:layout_marginBottom="8dp"
             tools:text="Every child comes into the world full of promise, and none more so than Chappie: he is gifted, special, a prodigy. Chappie he is a robot."
             android:textColor="@color/grey"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
