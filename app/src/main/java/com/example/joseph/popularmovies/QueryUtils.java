@@ -1,8 +1,8 @@
 package com.example.joseph.popularmovies;
 
-import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public final class QueryUtils {
 
-     static String TITLE = "title";
+
      static String  POSTERPATH = "poster_path";
      static String OVERVIEW = "overview";
      static String RELEASE_DATE = "releaseDate";
@@ -141,7 +141,6 @@ public final class QueryUtils {
         // Create an empty ArrayList that we can start adding movie thumbs to
         List<Movies> movies = new ArrayList<>();
 
-
         // Try to parse the JSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
@@ -152,6 +151,7 @@ public final class QueryUtils {
             for( int i = 0;  i < results.length(); i++){
                 JSONObject firstStart = results.optJSONObject(i);
                 int voteAverage = firstStart.optInt("vote_average"); // Movie rating
+                int id = firstStart.optInt("id");// movie id e.g 338952
                 String title = firstStart.optString("title"); // The title of the movie
                 String poster_path = firstStart.optString(POSTERPATH); // image
                 String overview = firstStart.optString(OVERVIEW); // The story line of the movie
@@ -164,7 +164,7 @@ public final class QueryUtils {
                 // Movies newMovies = new Movies(title, poster,overview,releaseDate,voteAverage);
                // Movies mainPageMovies = new Movies(poster_path);
 
-                // The sting imagePath is the path of the image poster for the movie
+                // The string imagePath is the path of the image poster for the movie
                 // which is also continued by the poster_path which is derived from the JSON parsing.
                 // a full image poster path will look like http://image.tmdb.org/t/p/w500/8u00gUM8aNqYLs10sTBQiXu0fEv.jpg
                 String imagePath =  "http://image.tmdb.org/t/p/w342/";
@@ -177,12 +177,15 @@ public final class QueryUtils {
                String votes= Integer.toString(voteAverage);
                String movieRating = votes + " / 10" ;
 
+               // since the result of id is in integers, this converts the MovieId back to a String resource
+                String movieId = Integer.toString(id);
+
                 //Movies mainPageMovies = new Movies(imagePoster);
                 // Add the new {@link Movies} to the list of movies
                 // movies.add(newMovies);
                 //movies.add(mainPageMovies);
 
-                Movies mm = new Movies(title,imagePoster,overview,releaseDate,movieRating,detailsImage);
+                Movies mm = new Movies(title,imagePoster,overview,releaseDate,movieRating,detailsImage,movieId);
                 movies.add(mm);
 
             }
@@ -198,6 +201,8 @@ public final class QueryUtils {
         // Return the list of popular movies
         return movies;
     }
+
+
 
 
 

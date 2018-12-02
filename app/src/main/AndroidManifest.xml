@@ -3,7 +3,7 @@
     package="com.example.joseph.popularmovies">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,10 +25,15 @@
             android:name=".DetailActivity"
             android:label="@string/name"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".SettingsActivity"
+        <activity
             android:parentActivityName=".MainActivity"
-            android:label="@string/settings_title">
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings">
 
+        </activity>
+
+        <activity android:name=".moviereviewdata.ReviewActivity"
+            android:label="Movie Reviews">
         </activity>
     </application>
 

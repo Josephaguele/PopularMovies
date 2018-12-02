@@ -1,6 +1,5 @@
 package com.example.joseph.popularmovies;
 
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -14,10 +13,12 @@ public class Movies implements Parcelable {
     private String overview;    // a plot synopsis (called overview in the api)
     private String releaseDate; // the release date of the movie
     private String userRating;  // called vote_average in the api
-    private String detailsImage;
+    private String detailsImage; // image for the details activity
+    private String movieId; // this is the id for the movie clicked, which is the most important factor needed in playing the movie trailer
+
 
    // CONSTRUCTOR calling all movie attributes
-    public Movies (String title, String mImage, String overview, String date, String rating, String mmImage){
+    public Movies (String title, String mImage, String overview, String date, String rating, String mmImage, String id){
 
         movieTitle = title;
         movieImage = mImage;
@@ -25,6 +26,7 @@ public class Movies implements Parcelable {
         releaseDate = date;
         userRating = rating;
         detailsImage = mmImage;
+        movieId = id;
     }
 
 
@@ -44,6 +46,7 @@ public class Movies implements Parcelable {
         releaseDate = in.readString();
         userRating = in.readString();
         detailsImage = in.readString();
+        movieId = in.readString();
 
     }
 
@@ -72,7 +75,8 @@ public class Movies implements Parcelable {
    public String getMovieImage(){return movieImage;}
    public String getReleaseDate(){return releaseDate;}
    public String getUserRating(){return userRating;}
-    public String getDetailsImage(){return  detailsImage;}
+   public String getDetailsImage(){return  detailsImage;}
+   public String getMovieId(){return movieId;}
 
     @Override
     public int describeContents() {
@@ -93,6 +97,7 @@ public class Movies implements Parcelable {
         dest.writeString(releaseDate);
         dest.writeString(userRating);
         dest.writeString(detailsImage);
+        dest.writeString(movieId);
     }
 
 

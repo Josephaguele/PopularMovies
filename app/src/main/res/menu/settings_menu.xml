@@ -6,7 +6,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="1"
         app:showAsAction="never"
-        android:title="@string/settings">
+        android:title="@string/title_activity_settings">
 
     </item>
 </menu>

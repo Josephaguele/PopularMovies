@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reviewer_name"
+        android:text="Precious"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="22sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="#2b3d4d"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reviewer_summary"
+        android:layout_below="@id/reviewer_name"
+        android:text="This movie reminds me of the organization and its structure in a work environment."
+        android:fontFamily="sans-serif"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="#73797e"/>
+
+</RelativeLayout>

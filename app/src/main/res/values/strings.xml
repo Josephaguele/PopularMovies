@@ -4,13 +4,43 @@
     <string name="trailer">Trailers</string>
     <string name="mark_as_favourite">Mark as Favourite</string>
 
-    <!--Settings Menu Item [CHAR LIMIT=NONE] -->
-    <string name="settings">Settings</string>
-    <!--Settings Activity Title [CHAR LIMIT =NONE]-->
-    <string name="settings_title">Movie Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <!-- Strings related to Settings -->
+
+    <!--  General settings -->
+    <string name="pref_header_general">Movies Settings</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Please kindly let us know what you feel about this app and please note that there is no page 0 in the movie pages. If you key in zero in display page text, you will get no result
+    </string>
+
+    <string name="pref_title_display_name">Display page</string>
+    <string name="pref_default_display_name">1</string>
+
+    <string name="pref_title_add_friends_to_messages">Sort movies by</string>
+    <string-array name="pref_example_list_titles">
+        <item>Popular</item>
+        <item>Top rated</item>
+        <item>Upcoming</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>popular</item>
+        <item>top_rated</item>
+        <item>upcoming</item>
+    </string-array>
 
 
-    <string name="popular_movies_label">Popular Movies</string>
-    <string name="settings_popular_key" translatable="false">popular</string>
-    <string name="settings_rating_key" translatable="false">rated_movies</string>
+
+    <string name="pref_popular_value">popular</string>
+    <string name="pref_movie_sort_key">movie_list</string>
+
+    <string name="pref_toprated_key">movies_rating</string>
+    <string name="pref_toprated_value">top_rated</string>
+
+
+    <string name="pref_upcoming_key">upcoming_movies</string>
+    <string name="pref_upcoming_value">upcoming</string>
+
+    <string name="pref_page_key">page</string>
+    <string name="pref_page_value">1</string>
 </resources>

@@ -18,7 +18,7 @@ public class MoviesLoader extends AsyncTaskLoader<List<Movies>> {
     /*Query URL*/
     private String mUrl;
 
-    /*Constructs a new {@link FootballLoader}
+    /*Constructs a new {@link movieslLoader}
    *@param context of the activity
    *@param url to load data from*/
     public MoviesLoader(Context context, String url) {
@@ -38,11 +38,10 @@ public class MoviesLoader extends AsyncTaskLoader<List<Movies>> {
         if (mUrl == null) {
             return null;
         }
-            // Perform the network request, parse the response, and extract a list of football games
+            // Perform the network request, parse the response, and extract a list of movies
             List<Movies> movies = QueryUtils.fetchMoviesData(mUrl);
             return movies;
             // load in background works like the AsyncTask doInBackground method.
-
 
     }
 
