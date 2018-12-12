@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.joseph.popularmovies.Movies;
 import com.example.joseph.popularmovies.R;
@@ -22,7 +23,7 @@ import static com.example.joseph.popularmovies.DetailActivity.API_KEY;
 
 public class ReviewActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Reviews>>{
 
-private static String QUERY_URL = "https://api.themoviedb.org/3/movie/184/reviews?api_key=";
+private static String QUERY_URL = "https://api.themoviedb.org/3/movie/184/reviews?api_key=c20c1695d76d341c16a929a587a97dfb";
     ReviewAdapter nAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,6 +78,8 @@ private static String QUERY_URL = "https://api.themoviedb.org/3/movie/184/review
         // if the movie list is valid, then add to the list and update it
         if (data != null && !data.isEmpty()) {
             nAdapter.addAll(data);
+        }else if(data == null && data.isEmpty()){
+            Toast.makeText(getApplicationContext(),"No reviews for this movie",Toast.LENGTH_LONG).show();
         }
     }
 

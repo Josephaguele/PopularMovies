@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.joseph.popularmovies.moviereviewdata.ReviewActivity;
 import com.example.joseph.popularmovies.trailerdata.QueryDetailActivity;
@@ -22,13 +23,12 @@ import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static final String API_KEY = "";
+    public static final String API_KEY = "c20c1695d76d341c16a929a587a97dfb";
     // e.g https://youtube.com/watch?v=trailerKey
 
 
     // Implementation of stage 2 stuffs
-
-
+    boolean isPlay = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,32 @@ public class DetailActivity extends AppCompatActivity {
         youtubeLauncherID(); // calling method to append the movie id
         DetailsPage(); // calling detailsPage
         ReviewActivityLauncherButton();
+        favouriteMovieActivation();
+
+
     }
+
+    void favouriteMovieActivation() {
+        ImageButton favouritesMovie = (ImageButton) findViewById(R.id.favouriteButton);
+        // Default button, if need set it in xml background = "@drawable/btn_rating"
+        favouritesMovie.setBackgroundResource(R.drawable.btn_rating);
+        favouritesMovie.setOnClickListener(favouriteMoviesToggleButton);
+
+    }
+    // this toggles the star button when clicked
+    View.OnClickListener favouriteMoviesToggleButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // change the button background when clicked by the user
+            if(isPlay){ // if the button is not clicked, the default colour of the button is shown
+                v.setBackgroundResource(R.drawable.btn_rating);
+            }else{ // if the button is clicked, the default colour of the button changes to yellow.
+                // which means that the user has selected the movie as a favourite movie.
+                v.setBackgroundResource(R.drawable.favourite);
+                Toast.makeText(getApplicationContext(),"marked as favourite",Toast.LENGTH_LONG).show();
+            }isPlay = !isPlay; // reverse
+        }
+    };
 
     void DetailsPage() {
         // collect all our intent
@@ -67,28 +92,28 @@ public class DetailActivity extends AppCompatActivity {
         Movies movies = getIntent().getParcelableExtra("Movies");
 
 
-            // Get the id of the movie clicked
-            String currentMovieId = movies.getMovieId();
+        // Get the id of the movie clicked
+        String currentMovieId = movies.getMovieId();
 
-             //String c = getIntent().getStringExtra("Movies");
-            String url = "https://api.themoviedb.org/3/movie/";
+        //String c = getIntent().getStringExtra("Movies");
+        String url = "https://api.themoviedb.org/3/movie/";
 
-            Uri baseUri = Uri.parse(url);
-            Uri.Builder uriBuilder = baseUri.buildUpon();
-            uriBuilder.appendPath(currentMovieId) // append the id to the url so you
-                    // https://api.themoviedb.org/3/movie/339253/videos?api_key="";
-                    .appendPath("videos")
-                    .appendQueryParameter("api_key", API_KEY)
-                    .build();
-            String url2 = uriBuilder.toString() + "";
-
-
-            Log.i("CURRENT MOVIE ID IS:",currentMovieId); // Adding movieId to the log just for checking movie id
+        Uri baseUri = Uri.parse(url);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendPath(currentMovieId) // append the id to the url so you
+                // https://api.themoviedb.org/3/movie/339253/videos?api_key="";
+                .appendPath("videos")
+                .appendQueryParameter("api_key", API_KEY)
+                .build();
+        String url2 = uriBuilder.toString() + "";
 
 
-            // Calling the AsyncTask method that did the background work to avoid multiple threads on the DetailsActivity.
-            DownloadVideosTask task = new DownloadVideosTask();
-            task.execute(url2);
+        Log.i("CURRENT MOVIE ID IS:", currentMovieId); // Adding movieId to the log just for checking movie id
+
+
+        // Calling the AsyncTask method that did the background work to avoid multiple threads on the DetailsActivity.
+        DownloadVideosTask task = new DownloadVideosTask();
+        task.execute(url2);
 
     }
 

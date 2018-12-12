@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -52,7 +53,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_toRightOf="@id/movieimage"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="24sp"
+                android:textSize="12sp"
                 android:textStyle="italic"
                 tools:text="120min" />
 
@@ -61,30 +62,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movietime"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_toRightOf="@id/movieimage"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 tools:text="8.1/10" />
 
-            <Button
-                android:id="@+id/favourite"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
+
+
+            <ImageButton
+                android:id="@+id/favouriteButton"
+                android:layout_width="50dp"
+                android:layout_height="54dp"
+                android:layout_marginRight="80dp"
                 android:layout_below="@id/movierating"
                 android:layout_marginTop="8dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_toRightOf="@+id/movieimage"
-                android:background="@color/mintgreen2"
                 android:text="@string/mark_as_favourite"
                 android:textSize="13sp" />
+
+
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:layout_below="@id/favourite"
+                android:layout_below="@id/favouriteButton"
                 android:id="@+id/reviews_button"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/mintgreen"
                 android:layout_toEndOf="@id/movieimage"
                 android:layout_toRightOf="@id/movieimage"

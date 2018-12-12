@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     String url;
 
     /** URL for api movies data from the API movie dataset**/
-    private static String QUERY_URL = "https://api.themoviedb.org/3/movie/popular?api_key=";
+    private static String QUERY_URL = "https://api.themoviedb.org/3/movie/popular?api_key=c20c1695d76d341c16a929a587a97dfb";
 
     // TextView that is displayed when the list is empty
     TextView mEmptyStateTextView;
@@ -159,19 +159,19 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
                 getString(R.string.pref_movie_sort_key),
                 getString(R.string.pref_popular_value)
         ).equals("popular")){ // value is : popular
-            url = "https://api.themoviedb.org/3/movie/popular?api_key=";
+            url = "https://api.themoviedb.org/3/movie/popular?api_key=c20c1695d76d341c16a929a587a97dfb";
         }else if ( // if the user chooses the top rated in the list preference, launch the top rate movies url
             sharedPref.getString(
                     getString(R.string.pref_toprated_key),
                     getString(R.string.pref_toprated_value)
             ).equals("top_rated")){ // value is top_rated as seen in the query
-            url = "https://api.themoviedb.org/3/movie/top_rated?api_key=";
+            url = "https://api.themoviedb.org/3/movie/top_rated?api_key=c20c1695d76d341c16a929a587a97dfb";
         }else if ( // if the user chooses the upcoming in the list preference, launch the upcoming movies url
                 sharedPref.getString(
                         getString(R.string.pref_upcoming_key),
                         getString(R.string.pref_upcoming_value)
                 ).equals("upcoming")){
-            url = "https://api.themoviedb.org/3/movie/upcoming?api_key=";
+            url = "https://api.themoviedb.org/3/movie/upcoming?api_key=c20c1695d76d341c16a929a587a97dfb";
         }
 
         // based on the EditTextPreference as keyed in by the user, append the query page to the url
